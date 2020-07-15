@@ -1,9 +1,9 @@
-from utils import readYaml, getArgs
+from utils import readConfig, getArgs
 
 if __name__ == "__main__":
 
     args = getArgs()
-    configData = readYaml(args.config)
+    configData = readConfig(args.config)
     
     # create and save global matrix
 

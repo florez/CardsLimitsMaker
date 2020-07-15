@@ -1,19 +1,18 @@
-import yaml
+import json
 import argparse
 
 
-def readYaml(path):
+def readConfig(path):
     """
-        Read yaml file and return as a 
+        Read json file and return as a 
         dict
     """
-    with open(path, 'r') as stream:
-        try:
-            return yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
-            print(exc)
+    f = open(path) 
+    data = json.load(f) 
+    f.close()
 
-
+    return data
+    
 def getArgs():
     """
         Get all the required arguments and return them in a dict
@@ -22,7 +21,7 @@ def getArgs():
         description='Create the yields and cards to calculate the limits.')
 
     parser.add_argument('-config',
-                        help='Path to the config.yml file with the signal and bg lists',
+                        help='Path to the config.json file with the signal and bg lists',
                         required=True)
 
     parser.add_argument('-sysUncert',
