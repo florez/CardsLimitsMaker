@@ -41,6 +41,10 @@ def getArgs():
                         choices=['exp', 'pheno'],
                         required=True)
 
+    parser.add_argument('-histogram',
+                        help='Histogram to analize e.g. Mtelectron, Mtmuon or Mjj',
+                        required=True)
+    
     args = parser.parse_args()
 
     # make sure paths have a slash at the end
