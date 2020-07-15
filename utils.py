@@ -36,10 +36,18 @@ def getArgs():
     parser.add_argument('-outputPath',
                         help='Path to the output folder',
                         required=True)
-                        
+
     parser.add_argument('-studyType',
                         help='Type of analysis',
                         choices=['exp', 'pheno'],
                         required=True)
 
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    if args.channelPath[-1] != '/':
+        args.channelPath += '/'
+
+    if args.outputPath[-1] != '/':
+        args.outputPath += '/'
+
+    return args
