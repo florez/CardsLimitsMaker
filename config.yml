@@ -7,6 +7,7 @@ signals:
   - m_n2_300_c1_185_n1_170
   - m_n2_300_c1_175_n1_150
   - m_n2_400_c1_375_n1_350
+  
 backgrounds:
   - ttbar
   - v+jets

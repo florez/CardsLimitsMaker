@@ -44,6 +44,7 @@ def getArgs():
 
     args = parser.parse_args()
 
+    # make sure paths have a slash at the end
     if args.channelPath[-1] != '/':
         args.channelPath += '/'
 
