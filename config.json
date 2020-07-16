@@ -2,13 +2,10 @@
 	"channelPath" : "/home/n.cardonac/CardsLimitsMaker/input/single_mu_met_bjets_vbf_pt15",
 	"sysUncertFile" : "/home/n.cardonac/CardsLimitsMaker/input/syst_uncertainties.dat",
 	"studyType" : "pheno",
-	"outputPath" : "/home/n.cardonac/CardsLimitsMaker/output",
+	"outputPath" : "/home/n.cardonac/CardsLimitsMaker/output/",
         "signals":[
-                "m_n2_100_c1_85_n1_70",
-                "m_n2_100_c1_75_n1_50",
-                "m_n2_100_c1_80_n1_60",
-                "m_n2_200_c1_185_n1_170",
-                "m_n2_200_c1_175_n1_150"
+				"m_n2_100_c1_75_n1_50",
+				"m_n2_100_c1_80_n1_60"
 	],
         "backgrounds":[
                 "ttbar",
