@@ -35,8 +35,9 @@ int main(int argc, char const *argv[])
 	cout << i << " " << edges[i] << " " << edges[i+1] << " "  <<  histo->GetBinContent(i) << endl;
 	outputfile << i << "," << edges[i] << "," << edges[i+1] << ","  <<  histo->GetBinContent(i) << endl;
     }
-
+	cout << "closing file..." << endl;
     outputfile.close();
+	cout << "FINISHED." << endl;
 
     return 0;
 }

@@ -10,7 +10,16 @@ def readConfig(path):
     f = open(path) 
     data = json.load(f) 
     f.close()
+    
+    # make sure the paths end with a /
+    if data['channelPath'][-1] != '/':
+        data['channelPath'] += '/'
 
+    if data['outputPath'][-1] != '/':
+        data['outputPath'] += '/'
+
+    print('Using configuration:')
+    print(json.dumps(data, indent=4))
     return data
     
 def getArgs():

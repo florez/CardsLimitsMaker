@@ -1,21 +1,14 @@
-{ -outputPath {} \
-                   -studyType {} \
-                   -sysUncert {} \
-                   -channelPath {} \
-                   -histogram {}
-	"channelPath" : "",
-	"sysUncertFile" : "",
-	"studyType" : "",
-	"outputPath" : "",
+{
+	"channelPath" : "/home/n.cardonac/CardsLimitsMaker/input/single_mu_met_bjets_vbf_pt15",
+	"sysUncertFile" : "/home/n.cardonac/CardsLimitsMaker/input/syst_uncertainties.dat",
+	"studyType" : "pheno",
+	"outputPath" : "/home/n.cardonac/CardsLimitsMaker/output",
         "signals":[
                 "m_n2_100_c1_85_n1_70",
                 "m_n2_100_c1_75_n1_50",
                 "m_n2_100_c1_80_n1_60",
                 "m_n2_200_c1_185_n1_170",
-                "m_n2_200_c1_175_n1_150",
-                "m_n2_300_c1_185_n1_170",
-                "m_n2_300_c1_175_n1_150",
-                "m_n2_400_c1_375_n1_350"
+                "m_n2_200_c1_175_n1_150"
 	],
         "backgrounds":[
                 "ttbar",
@@ -23,8 +16,7 @@
                 "vv"
 	],
 	"histograms": [
-		"Mtelectron" : {"binEdges" : [0.0,40.0,60.0,80.0,100.0,120.0,140.0,160.0,300.0]},
-		"Ptelectron" : {"binEdges" : [0.0, 1000.0,1500.0, 2000.0, 2500.0,3000.0,4000.0]}
+		{"name" : "Mtmuon" , "binEdges" : [0.0,40.0,60.0,80.0,100.0,120.0,140.0,160.0,300.0]}
 	]
 }
 
