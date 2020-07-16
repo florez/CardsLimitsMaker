@@ -1,6 +1,7 @@
 from utils import readConfig, getArgs
 import os
 import pandas as pd
+import numpy as np
 
 def createOutputFolders(config):
 
@@ -28,22 +29,72 @@ def getIndHistogramsInfo(config, outputPath):
 			print(commandToRun)
 			os.system(commandToRun)
 
-def createGlobalMatrix(configData):
-	pass
+def createGlobalMatrix(config, outputPath):
+	for histo in config['histograms']:
+		
+		histoName = histo['name']
+		folderToProcess = outputPath + histoName + '/' 
 
+		globalMatrix = pd.DataFrame()
+
+		for sample in config['signals'] + config['backgrounds']:
+			
+			tempDf = pd.read_csv(folderToProcess + 'rawHistogramInfo/' + sample + '.csv')
+			globalMatrix[sample] = tempDf['BinCount'] 
+		
+		globalMatrix['Data'] = 0
+		for bg in config['backgrounds']:
+			globalMatrix['Data'] = globalMatrix['Data'] + globalMatrix[bg] 
+		
+		globalMatrix['data'] = np.ceil(globalMatrix['Data'])
+		globalMatrix['bin'] = tempDf.index + 1
+
+		#change order of bin and data in the df
+		cols = ['bin', 'data'] + list(globalMatrix.columns[:-2])
+		globalMatrix = globalMatrix[cols]
+
+		globalMatrix.to_csv(folderToProcess + 'globalMatrix.csv', index = False) 	
+		
+
+def createYields(config, outputPath):
+
+	for histo in config['histograms']:
+		histoName = histo['name']
+		folderToProcess = outputPath + histoName + '/' 
+		globalMatrix = pd.read_csv(folderToProcess + 'globalMatrix.csv')
+
+		for sample in config['signals'] + config['backgrounds'] + ['data']:
+		
+			globalMatrix[sample].to_csv(folderToProcess + 'yields/' + sample + '.dat' ,header=False, index = False)			
+
+def createCards(config, outputPath):
+
+	for histo in config['histograms']:
+		histoName = histo['name']
+		folderToProcess = outputPath + histoName + '/' 
+		globalMatrix = pd.read_csv(folderToProcess + 'globalMatrix.csv')
+
+		for sample in config['signals'] + config['backgrounds'] + ['data']:
+			break	
+	
 if __name__ == "__main__":
-    args = getArgs()
-    configData = readConfig(args.config)
+	args = getArgs()
+	configData = readConfig(args.config)
     
-    print('Creating output folders...')
-    outputPath = createOutputFolders(configData)
+	print('Creating output folders...')
+	outputPath = createOutputFolders(configData)
 
     # create and save global matrix
-    print('Retrieving individual histogram data...')
-    getIndHistogramsInfo(configData,outputPath)
+	print('Retrieving individual histogram data...')
+	getIndHistogramsInfo(configData,outputPath)
+	
+	print("Creating global matrix...")
+	createGlobalMatrix(configData, outputPath)
+	
+	print("Creating yields...")
+    # create and save yields from matrix 
+	createYields(configData, outputPath)
 
-    print("Creating global matrix...")
-	createGlobalMatrix(configData)
-    # create and save from matrix 
-
+	print("Creating cards...")
     # create and save from matrix
+	createCards(configData,outputPath)
