@@ -21,4 +21,4 @@ DELPHESINC=${DELPHESDIR}
 #	-L$(DELPHESLIB) -lDelphes -L$(EXROOTLIB) -lExRootAnalysis $(ROOTLIBS)
 
 compile:  main.cc 
-	g++ -o main main.cc -Wl,-rpath,/Applications/root_v6.16.00/bin/root/lib `root-config --cflags --glibs`
+	g++ -o main main.cc `root-config --cflags --glibs`
