@@ -73,9 +73,40 @@ def createCards(config, outputPath):
 		histoName = histo['name']
 		folderToProcess = outputPath + histoName + '/' 
 		globalMatrix = pd.read_csv(folderToProcess + 'globalMatrix.csv')
+		
+		uncertFile = open(config['sysUncertFile'], "r")
+		uncertFileNumLines = len(uncertFile.readlines(  ))
+		uncertFile.close()
 
-		for sample in config['signals'] + config['backgrounds'] + ['data']:
-			break	
+		
+		for signal in config['signals']:
+			for binNum in globalMatrix['bin']:
+				
+							
+				uncertFile = open(config['sysUncertFile'], "r")
+				
+				outFile = open(folderToProcess + 'cards/' + signal + '_' + str(binNum) + '.txt','w')
+				
+				outFile.write('imax 1  number of channels\n')
+				outFile.write('jmax {}  number of backgrounds\n'.format(len(config['backgrounds'])))
+				outFile.write('kmax {}  number of nuisance parameters (sources of systematic uncertainties)\n'.format(uncertFileNumLines))
+				
+				outFile.write('bin {}\n'.format(binNum))
+				outFile.write('observation {}\n'.format(int(globalMatrix['data'].values[binNum-1])))
+
+				outFile.write('bin {}\n'.format(' '.join([str(binNum)]*(len(config['backgrounds'])+1))))
+				outFile.write('process SIG {} \n'.format(' '.join(config['backgrounds'])))
+				outFile.write('process {}\n'.format( ' '.join([str(x) for x in range(len(config['backgrounds'])+1)]) ))
+				outFile.write('rate {} {}\n'.format(globalMatrix[signal].values[binNum-1],' '.join( [str(x) for x in  globalMatrix[config['backgrounds']].iloc[binNum-1].values]  )))
+		
+					
+				outFile.write(uncertFile.read())
+				outFile.close()
+
+		
+				uncertFile.close()
+
+	
 	
 if __name__ == "__main__":
 	args = getArgs()
