@@ -1,4 +1,12 @@
-{
+{ -outputPath {} \
+                   -studyType {} \
+                   -sysUncert {} \
+                   -channelPath {} \
+                   -histogram {}
+	"channelPath" : "",
+	"sysUncertFile" : "",
+	"studyType" : "",
+	"outputPath" : "",
         "signals":[
                 "m_n2_100_c1_85_n1_70",
                 "m_n2_100_c1_75_n1_50",
@@ -7,9 +15,16 @@
                 "m_n2_200_c1_175_n1_150",
                 "m_n2_300_c1_185_n1_170",
                 "m_n2_300_c1_175_n1_150",
-                "m_n2_400_c1_375_n1_350"],
+                "m_n2_400_c1_375_n1_350"
+	],
         "backgrounds":[
                 "ttbar",
                 "v+jets",
-                "vv"]
+                "vv"
+	],
+	"histograms": [
+		"Mtelectron" : {"binEdges" : [0.0,40.0,60.0,80.0,100.0,120.0,140.0,160.0,300.0]},
+		"Ptelectron" : {"binEdges" : [0.0, 1000.0,1500.0, 2000.0, 2500.0,3000.0,4000.0]}
+	]
 }
+
