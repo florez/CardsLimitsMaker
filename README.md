@@ -44,16 +44,16 @@ In order to run the program, you need to congfigure the configuration file in `J
      "studyType" : <type of study, for now, only "pheno" is supported>,
      "outputPath" : <output folder path>,
          "signals":[
-				<name of signal 1>,
-				<name of signal 2>,
+				signal1.root,
+				signal2.root>,
 				.
 				.
 				.
      ],
          "backgrounds":[
-				<name of background 1>,
-				<name of background 2>,
-				<name of background 3>,
+				background1.root,
+				background2.root,
+				background3.root,
 				.
 				.
 				.
